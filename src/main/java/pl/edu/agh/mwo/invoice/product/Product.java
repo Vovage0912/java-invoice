@@ -16,18 +16,21 @@ public abstract class Product {
     }
 
     public String getName() {
-        return null;
+        if (name.equals("null")) {
+            throw new IllegalArgumentException();
+        }
+        return name;
     }
 
     public BigDecimal getPrice() {
-        return null;
+        return price;
     }
 
     public BigDecimal getTaxPercent() {
-        return null;
+        return taxPercent;
     }
 
     public BigDecimal getPriceWithTax() {
-        return null;
+        return price.add(price.multiply(taxPercent));
     }
 }
