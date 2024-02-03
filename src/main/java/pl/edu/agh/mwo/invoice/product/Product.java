@@ -22,7 +22,7 @@ public abstract class Product {
             throw new IllegalArgumentException("Cena nie może być nullem");
         }
 
-        if (price.intValue() < 0) {
+        if (price.doubleValue() < 0) {
             throw new IllegalArgumentException("Cena nie może być ujemna");
         }
 
