@@ -3,39 +3,53 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-    private Collection<Product> products;
+    private Map<Product, Integer> products = new HashMap<>();
 
-    public Invoice() {
-        this.products = new ArrayList<>();
-    };
 
     public void addProduct(Product product) {
-        products.add(product);
+        if (product == null) {
+            throw new IllegalArgumentException("The product cannot be null");
+        }
+        products.put(product,1);
     }
 
     public void addProduct(Product product, Integer quantity) {
+        if (product == null || quantity <=0) {
+            throw new IllegalArgumentException("The product cannot be null and the quantity has to be > 0");
+        }
         for (int i = 0; i<quantity; i++) {
-            products.add(product);
+            products.put(product,quantity);
         }
     }
 
     public BigDecimal getSubtotal() {
         BigDecimal subTotal = new BigDecimal("0");
-        for (Product product : products) {
-         subTotal = subTotal.add(product.getPrice());
+        for (Map.Entry<Product, Integer> product : products.entrySet()) {
+            BigDecimal productPrice = product.getKey().getPrice();
+            Integer quantity = product.getValue();
+         subTotal = subTotal.add(productPrice.multiply((new BigDecimal(quantity))));
         }
         return subTotal;
     }
 
     public BigDecimal getTax() {
-        return BigDecimal.ZERO;
+        BigDecimal totalTax = BigDecimal.ZERO;
+
+        for (Map.Entry<Product, Integer> product : products.entrySet()){
+            BigDecimal productPrice = product.getKey().getTaxPercent().multiply(product.getKey().getPrice());
+            Integer quantity = product.getValue();
+            totalTax = totalTax.add(productPrice.multiply((new BigDecimal(quantity))));
+        }
+        return totalTax;
     }
 
     public BigDecimal getTotal() {
-        return BigDecimal.ZERO;
+        return getSubtotal().add(getTax());
     }
 }

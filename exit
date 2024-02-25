@@ -1,0 +1,30 @@
+[1mdiff --git a/src/main/java/pl/edu/agh/mwo/invoice/product/Product.java b/src/main/java/pl/edu/agh/mwo/invoice/product/Product.java[m
+[1mindex 318de9a..7cffaec 100644[m
+[1m--- a/src/main/java/pl/edu/agh/mwo/invoice/product/Product.java[m
+[1m+++ b/src/main/java/pl/edu/agh/mwo/invoice/product/Product.java[m
+[36m@@ -16,18 +16,21 @@[m [mpublic abstract class Product {[m
+     }[m
+ [m
+     public String getName() {[m
+[31m-        return null;[m
+[32m+[m[32m        if (name.equals("null")) {[m
+[32m+[m[32m            throw new IllegalArgumentException();[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return name;[m
+     }[m
+ [m
+     public BigDecimal getPrice() {[m
+[31m-        return null;[m
+[32m+[m[32m        return price;[m
+     }[m
+ [m
+     public BigDecimal getTaxPercent() {[m
+[31m-        return null;[m
+[32m+[m[32m        return taxPercent;[m
+     }[m
+ [m
+     public BigDecimal getPriceWithTax() {[m
+[31m-        return null;[m
+[32m+[m[32m        return price.add(price.multiply(taxPercent));[m
+     }[m
+ }[m

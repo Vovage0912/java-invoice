@@ -44,6 +44,7 @@ public abstract class Product {
     }
 
     public BigDecimal getPriceWithTax() {
-        return price.add(price.multiply(taxPercent));
+        BigDecimal priceWithTax = price.multiply(taxPercent).add(price);
+        return priceWithTax;
     }
 }
