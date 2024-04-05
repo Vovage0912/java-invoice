@@ -14,8 +14,8 @@ public class Invoice {
 
     private int invoiceNumber;
 
-    public Invoice () {
-        invoiceNumber=++invoiceCounter;
+    public Invoice() {
+        invoiceNumber =++ invoiceCounter;
     }
 
     public void addProduct(Product product) {
@@ -28,7 +28,7 @@ public class Invoice {
         }
         if (products.containsKey(product)) {
             int ilosc = products.get(product);
-            products.replace(product,ilosc + quantity);
+            products.replace(product, ilosc + quantity);
         } else {
             products.put(product, quantity);
         }
@@ -62,27 +62,30 @@ public class Invoice {
     }
 
     public void printInvoice() {
-        int liczba_pozycji = 0;
-        BigDecimal razem_netto = BigDecimal.ZERO;
-        BigDecimal razem_brutto = BigDecimal.ZERO;
+        int liczbaPozycji = 0;
+        BigDecimal razemNetto = BigDecimal.ZERO;
+        BigDecimal razemBrutto = BigDecimal.ZERO;
         System.out.println("\nFaktura nr.: " + getInvoiceNumber());
-        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------" +
+                "-------------------------------------------");
         for (Map.Entry<Product, Integer> produkt : products.entrySet()) {
             Product p = produkt.getKey();
             Integer i = produkt.getValue();
-            BigDecimal cena_netto = p.getPrice().multiply(BigDecimal.valueOf(i));
-            BigDecimal cena_brutto = p.getPriceWithTax().multiply(BigDecimal.valueOf(i));
-            System.out.println("Nazwa Pozycji: " + p.getName() + String.format("%"+(longestProductName()
-                    +5-p.getName().length())+"s", " ") +  " ilość sztuk: " + i +
-                    String.format("%"+(theLargestQuantity()+4)+"s"," ") + " razem netto: " + cena_netto +" PLN");
-            razem_netto = razem_netto.add(cena_netto);
-            razem_brutto = razem_brutto.add(cena_brutto);
-            liczba_pozycji ++;
+            BigDecimal cenaNetto = p.getPrice().multiply(BigDecimal.valueOf(i));
+            BigDecimal cenaBrutto = p.getPriceWithTax().multiply(BigDecimal.valueOf(i));
+            System.out.println("Nazwa Pozycji: " + p.getName() + String.format("%" + (longestProductName()
+                    + 5 - p.getName().length()) + "s", " ") + " ilość sztuk: " + i +
+                    String.format("%"+(theLargestQuantity() + 4) + "s"," ") + " razem netto: "
+                    + cenaNetto + " PLN");
+            razemNetto = razemNetto.add(cenaNetto);
+            razemBrutto = razemBrutto.add(cenaBrutto);
+            liczbaPozycji++;
         }
-        System.out.println("---------------------------------------------------------------------------------------");
-        System.out.println("Razem netto: " + razem_netto.setScale(2, RoundingMode.HALF_UP) + " PLN");
-        System.out.println("Razem brutto: " + razem_brutto.setScale(2,RoundingMode.UP) + " PLN");
-        System.out.println("Liczba pozycji na fakturze: " + liczba_pozycji);
+        System.out.println("------------------------------------------" +
+                "---------------------------------------------");
+        System.out.println("Razem netto: " + razemNetto.setScale(2, RoundingMode.HALF_UP) + " PLN");
+        System.out.println("Razem brutto: " + razemBrutto.setScale(2,RoundingMode.UP) + " PLN");
+        System.out.println("Liczba pozycji na fakturze: " + liczbaPozycji);
     }
 
     private int longestProductName() {
@@ -99,7 +102,7 @@ public class Invoice {
     private int theLargestQuantity() {
         int largestQuantity = 0;
         for (Integer ilosc : products.values()) {
-            if (ilosc>largestQuantity) {
+            if (ilosc > largestQuantity) {
                 largestQuantity = ilosc;
             }
         }
