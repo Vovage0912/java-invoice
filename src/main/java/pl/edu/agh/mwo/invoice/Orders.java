@@ -36,8 +36,8 @@ public class Orders {
         faktura2.addProduct(paliwo);
         faktura2.addProduct(pomidor, 1);
         faktura2.addProduct(banan, 1);
-        faktura2.addProduct(ananas, 4);
-        faktura2.addProduct(wino, 4);
+        faktura2.addProduct(ananas, 2);
+        faktura2.addProduct(wino, 1);
 
         faktura1.printInvoice();
         faktura2.printInvoice();
