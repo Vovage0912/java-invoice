@@ -24,9 +24,9 @@ public class Orders {
         Invoice faktura1 = new Invoice();
         faktura1.addProduct(pomidor);
         faktura1.addProduct(banan);
-        faktura1.addProduct(ananas, 2);
-        faktura1.addProduct(pomidor, 3);
-        faktura1.addProduct(banan, 2);
+        faktura1.addProduct(ananas, 2); //a
+        faktura1.addProduct(pomidor, 3); // b
+        faktura1.addProduct(banan, 2); //c
 
         Product wino = new BottleOfWine("amarena", BigDecimal.valueOf(WINE_PRICE_NETTO));
         Product paliwo = new FuelCanister("Pb95", BigDecimal.valueOf(FUEL_PRICE_NETTO));
@@ -34,9 +34,9 @@ public class Orders {
         Invoice faktura2 = new Invoice();
         faktura2.addProduct(wino, 1);
         faktura2.addProduct(paliwo);
-        faktura2.addProduct(pomidor, 4);
-        faktura2.addProduct(banan, 1);
-        faktura2.addProduct(ananas, 6);
+        faktura2.addProduct(pomidor, 4); //a
+        faktura2.addProduct(banan, 1); //b
+        faktura2.addProduct(ananas, 6); //c
         faktura2.addProduct(wino, 2);
 
         faktura1.printInvoice();

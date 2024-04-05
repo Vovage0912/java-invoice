@@ -77,8 +77,8 @@ public class Invoice {
             BigDecimal cenaBrutto = p.getPriceWithTax().multiply(BigDecimal.valueOf(i));
             System.out.println("Nazwa Pozycji: " + p.getName() + String.format("%"
                     + (longestProductName() + SPACE1 - p.getName().length()) + "s", " ")
-                    + " ilość sztuk: " + i + String.format("%" + (theLargestQuantity() + SPACE2) + "s"," ")
-                    + " razem netto: " + cenaNetto + " PLN");
+                    + " ilość sztuk: " + i + String.format("%" + (theLargestQuantity() + SPACE2)
+                    + "s", " ") + " razem netto: " + cenaNetto + " PLN");
             razemNetto = razemNetto.add(cenaNetto);
             razemBrutto = razemBrutto.add(cenaBrutto);
             liczbaPozycji++;
