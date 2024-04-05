@@ -85,18 +85,18 @@ public class Invoice {
         System.out.println("Liczba pozycji na fakturze: " + liczba_pozycji);
     }
 
-    private int longestProductName () {
+    private int longestProductName() {
         int longestName = 0;
         for (Product produkt : products.keySet()) {
             int nameLength = produkt.getName().length();
-            if (nameLength>longestName) {
+            if (nameLength > longestName) {
                 longestName = nameLength;
             }
         }
         return longestName;
     }
 
-    private int theLargestQuantity () {
+    private int theLargestQuantity() {
         int largestQuantity = 0;
         for (Integer ilosc : products.values()) {
             if (ilosc>largestQuantity) {
@@ -106,7 +106,7 @@ public class Invoice {
         return largestQuantity;
     }
 
-    public int getAllPositions () {
+    public int getAllPositions() {
         return products.size();
     }
 }

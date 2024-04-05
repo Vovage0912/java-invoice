@@ -34,7 +34,8 @@ public abstract class Product {
 
     public BigDecimal getPriceWithTax() {
         if (this.getClass() == BottleOfWine.class || this.getClass() == FuelCanister.class) {
-            return (price.multiply(taxPercent).add(price)).add(BigDecimal.valueOf(5.56));
+            double excise = 5.56;
+            return (price.multiply(taxPercent).add(price)).add(BigDecimal.valueOf(excise));
         }  else {
             return price.multiply(taxPercent).add(price);
         }

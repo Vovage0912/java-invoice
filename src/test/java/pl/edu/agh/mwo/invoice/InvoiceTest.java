@@ -21,10 +21,14 @@ public class InvoiceTest {
     @Before
     public void createEmptyInvoiceForTheTest() {
         invoice = new Invoice();
-        product1 = new DairyProduct("Product1", BigDecimal.valueOf(10));
-        product2 = new DairyProduct("Product2", BigDecimal.valueOf(20));
-        product3 = new FuelCanister("Fuel", BigDecimal.valueOf(40.5));
-        product4 = new BottleOfWine("Wine", BigDecimal.valueOf(10.5));
+        int product1PriceNetto = 10;
+        product1 = new DairyProduct("Product1", BigDecimal.valueOf(product1PriceNetto));
+        int product2PriceNetto = 20;
+        product2 = new DairyProduct("Product2", BigDecimal.valueOf(product2PriceNetto));
+        double fuelPriceNetto = 40.5;
+        product3 = new FuelCanister("Fuel", BigDecimal.valueOf(fuelPriceNetto));
+        double winePriceNetto = 10.5;
+        product4 = new BottleOfWine("Wine", BigDecimal.valueOf(winePriceNetto));
 
     }
 
@@ -169,12 +173,12 @@ public class InvoiceTest {
 
     @Test
     public void testPriceWithExcise() {
-        // Dodanie produktów do faktury
         invoice.addProduct(product3, 1);
         invoice.addProduct(product4, 1);
 
-        BigDecimal fuelPriceWithExcise = product3.getPrice().add(BigDecimal.valueOf(5.56));
-        BigDecimal winePriceWithVatAndExcise = (product4.getPrice().multiply(BigDecimal.valueOf(1.23))).add(BigDecimal.valueOf(5.56));
+        double excise = 5.56;
+        BigDecimal fuelPriceWithExcise = product3.getPrice().add(BigDecimal.valueOf(excise));
+        BigDecimal winePriceWithVatAndExcise = (product4.getPrice().multiply(BigDecimal.valueOf(1.23))).add(BigDecimal.valueOf(excise));
 
 
         Assert.assertThat(fuelPriceWithExcise, Matchers.equalTo(product3.getPriceWithTax().setScale(2, RoundingMode.UP)));
